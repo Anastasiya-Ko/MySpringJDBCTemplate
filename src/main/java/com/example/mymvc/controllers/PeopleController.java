@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/people")
-@Tag(name = "Контроллер для работы сос списком людей")
+@Tag(name = "Контроллер для работы со списком людей")
 public class PeopleController {
 
     private PersonDAO personDAO;
