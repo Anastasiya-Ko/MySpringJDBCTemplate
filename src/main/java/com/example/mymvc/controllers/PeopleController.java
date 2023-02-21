@@ -22,47 +22,42 @@ public class PeopleController {
         this.personDAO = personDAO;
     }
 
-    /**
-     * Получаем всех людей их DAO
-     */
     @Operation(summary = "Отображает всех людей из списка", description = "Список людей находится в ДАО")
-    @GetMapping("/all")
+    @GetMapping("/getAll")
     public List<Person> index() {
 
        return personDAO.index();
     }
 
-    /**
-     * Получим одного человека по id из DAO
-     */
-    @GetMapping("/one/{id}")
+    @Operation(summary = "Получения одного человека по id")
+    @GetMapping("/getOne/{id}")
     public Person showWithId(@PathVariable("id") int id) {
         return personDAO.show(id);
     }
 
+    @Operation(summary = "Получение одного человека по имени")
     @GetMapping("/getName/{name}")
     public Person showWithName(@PathVariable("name") String name) {
         return personDAO.showName(name);
     }
 
+    @Operation(summary = "Создание нового человека", description = "При создании человека поля валидируются, согласно заданным условиям")
     @PostMapping
     public ResponseEntity<PersonDAO> createPeople(@Valid @RequestBody Person person) {
-
             personDAO.save(person);
-
  //       return new ResponseEntity<>(personDAO, HttpStatus.OK);
         return ResponseEntity.ok().body(personDAO);
     }
 
-    @PutMapping("/put/{id}")
+    @Operation(summary = "Внесение изменений в учётную запись человека по его id", description = "Новая информация должна валидироваться, согласно заданным условиям")
+    @PutMapping("/{id}")
     public ResponseEntity<PersonDAO> updatePerson(@PathVariable int id,
                                                   @Valid @RequestBody Person person) {
-
             personDAO.update(id, person);
-
         return ResponseEntity.ok().body(personDAO);
     }
 
+    @Operation(summary = "Удаление учётной записи человека по его id")
     @DeleteMapping("{id}")
     public String delete(@PathVariable("id") int id) {
         personDAO.delete(id);
