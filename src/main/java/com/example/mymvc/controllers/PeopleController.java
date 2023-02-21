@@ -25,7 +25,6 @@ public class PeopleController {
     @Operation(summary = "Отображает всех людей из списка", description = "Список людей находится в ДАО")
     @GetMapping("/getAll")
     public List<Person> index() {
-
        return personDAO.index();
     }
 
