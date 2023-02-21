@@ -44,7 +44,6 @@ public class PeopleController {
     @PostMapping
     public ResponseEntity<PersonDAO> createPeople(@Valid @RequestBody Person person) {
             personDAO.save(person);
- //       return new ResponseEntity<>(personDAO, HttpStatus.OK);
         return ResponseEntity.ok().body(personDAO);
     }
 
