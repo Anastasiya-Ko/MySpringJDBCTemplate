@@ -16,7 +16,7 @@ import java.util.List;
 @Tag(name = "Контроллер для работы со списком людей")
 public class PeopleController {
 
-    private PersonDAO personDAO;
+    private final PersonDAO personDAO;
 
     public PeopleController(PersonDAO personDAO) {
         this.personDAO = personDAO;
@@ -63,23 +63,4 @@ public class PeopleController {
         return String.format("Данные о человеке с id=%d успешно удалены", id);
     }
 
-
-
-
-
-//    @PostMapping("/sann")
-//    public ResponseEntity<?> create(
-//            @RequestBody @Valid Person person,
-//            BindingResult bindingResult) {
-//
-//        try{
-//            personDAO.save(person);
-//        }catch(Exception e){
-//            e.printStackTrace();
-//        }
-//
-//
-//
-//        return new ResponseEntity<>(person, HttpStatus.OK);
-//    }
 }
