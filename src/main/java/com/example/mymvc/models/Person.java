@@ -3,7 +3,11 @@ package com.example.mymvc.models;
 
 import jakarta.validation.constraints.*;
 
+
 public class Person {
+
+    public Person() {
+    }
 
     private int id;
     @NotEmpty(message = "У человека должно быть имя!")
