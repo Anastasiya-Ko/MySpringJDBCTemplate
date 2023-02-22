@@ -12,7 +12,6 @@ import java.util.List;
 @Data
 public class PersonDAO {
 
-    public int PEOPLE_COUNT;
 
     private static final String URL = "jdbc:postgresql://localhost:5432/postgres";
     private static String USERNAME = "postgres";
@@ -58,13 +57,28 @@ public class PersonDAO {
     }
 
     public Person show (int id) throws RuntimeException{
-        // return people.get(id);
-        // return people.stream().filter(person -> person.getId() == id).findAny().orElse(null);
+        Person person = null;
 
-//        for (Person person : people) {
-//            if (person.getId() == id) return person;
-//        } throw new RuntimeException("Не найден People с таким id !");
-    return null;
+        try {
+            PreparedStatement preparedStatement =
+                    connection.prepareStatement("SELECT * FROM Person WHERE id=?");
+
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            resultSet.next();
+
+            person = new Person();
+
+            person.setId(resultSet.getInt("id"));
+            person.setAge(resultSet.getInt("age"));
+            person.setName(resultSet.getString("name"));
+            person.setEmail(resultSet.getString("email"));
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return person;
     }
 
     public Person showName(String name) {
@@ -76,23 +90,51 @@ public class PersonDAO {
     }
 
     public Person save(Person person) {
-//        person.setId(++PEOPLE_COUNT);
-//        people.add(person);
+
+        try {
+            PreparedStatement preparedStatement =
+                    connection.prepareStatement("INSERT INTO Person VALUES (1, ?, ?, ?)");
+            preparedStatement.setString(1, person.getName());
+            preparedStatement.setInt(2, person.getAge());
+            preparedStatement.setString(3, person.getEmail());
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return person;
     }
 
     public void delete(int id) {
-//        for (int i = 0; i < people.size(); i++) {
-//            if (people.get(i).getId() == id) people.remove(i);
-//        }
-    //    people.removeIf(person -> person.getId() == id);
+        PreparedStatement preparedStatement =
+                null;
+        try {
+            preparedStatement = connection.prepareStatement("DELETE FROM Person WHERE id=?");
+
+            preparedStatement.setInt(1, id);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void update(int id, Person updatePerson) {
-        Person personToBeUpdate = show(id);
-        personToBeUpdate.setName(updatePerson.getName());
-        personToBeUpdate.setAge(updatePerson.getAge());
-        personToBeUpdate.setEmail(updatePerson.getEmail());
+        try {
+            PreparedStatement preparedStatement =
+                    connection.prepareStatement("UPDATE Person SET name=?, age=?, email=? WHERE id=?");
+
+            preparedStatement.setString(1, updatePerson.getName());
+            preparedStatement.setInt(2, updatePerson.getAge());
+            preparedStatement.setString(3, updatePerson.getEmail());
+            preparedStatement.setInt(4, id);
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 
