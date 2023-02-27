@@ -23,43 +23,43 @@ public class PeopleController {
     }
 
     @Operation(summary = "Отображает всех людей из списка", description = "Список людей находится в ДАО")
-    @GetMapping("/getAll")
+    @GetMapping("/get-all")
     public List<Person> index() {
-       return personDAO.index();
+        return personDAO.index();
     }
 
     @Operation(summary = "Получения одного человека по id")
-    @GetMapping("/getOne/{id}")
+    @GetMapping("/get-one/{id}")
     public Person showWithId(@PathVariable("id") int id) {
         return personDAO.show(id);
     }
 
     @Operation(summary = "Получение одного человека по имени")
-    @GetMapping("/getName/{name}")
+    @GetMapping("/get-name/{name}")
     public Person showWithName(@PathVariable("name") String name) {
         return personDAO.showName(name);
     }
 
     @Operation(summary = "Создание нового человека", description = "При создании человека поля валидируются, согласно заданным условиям")
     @PostMapping
-    public ResponseEntity<PersonDAO> createPeople(@Valid @RequestBody Person person) {
-            personDAO.save(person);
-        return ResponseEntity.ok().body(personDAO);
+    public ResponseEntity<Person> createPeople(@Valid @RequestBody Person person) {
+        personDAO.save(person);
+        return ResponseEntity.ok().body(person);
     }
 
     @Operation(summary = "Внесение изменений в учётную запись человека по его id", description = "Новая информация должна валидироваться, согласно заданным условиям")
     @PutMapping("/{id}")
-    public ResponseEntity<PersonDAO> updatePerson(@PathVariable int id,
+    public ResponseEntity<Person> updatePerson(@PathVariable int id,
                                                   @Valid @RequestBody Person person) {
-            personDAO.update(id, person);
-        return ResponseEntity.ok().body(personDAO);
+        personDAO.update(id, person);
+        return ResponseEntity.ok().body(person);
     }
 
     @Operation(summary = "Удаление учётной записи человека по его id")
     @DeleteMapping("{id}")
     public String delete(@PathVariable("id") int id) {
         personDAO.delete(id);
-        return String.format("Данные о человеке с id=%d успешно удалены", id);
+        return String.format("The person with the id=%d has been successfully deleted", id);
     }
 
 }
