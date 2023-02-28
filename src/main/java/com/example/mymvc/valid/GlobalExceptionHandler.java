@@ -1,5 +1,6 @@
 package com.example.mymvc.valid;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -11,12 +12,12 @@ import java.util.List;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public String handleValidationErrors(MethodArgumentNotValidException ex) {
+    public ResponseEntity<?> handleValidationErrors(MethodArgumentNotValidException ex) {
         List<String> errors = ex.getBindingResult().getFieldErrors()
                 .stream()
                 .map(FieldError::getDefaultMessage)
                 .toList();
-        return errors.toString();
+        return ResponseEntity.badRequest().body(errors);
     }
 
 

@@ -5,6 +5,7 @@ import com.example.mymvc.models.Person;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -57,9 +58,10 @@ public class PeopleController {
 
     @Operation(summary = "Удаление учётной записи человека по его id")
     @DeleteMapping("{id}")
-    public String delete(@PathVariable("id") int id) {
+    public ResponseEntity<?> delete(@PathVariable("id") int id) {
         personDAO.delete(id);
-        return String.format("The person with the id=%d has been successfully deleted", id);
+      //  return ResponseEntity.ok().body("ччсми");
+        return new ResponseEntity<>(" Успешно  обработан!", HttpStatus.OK);
     }
 
 }
