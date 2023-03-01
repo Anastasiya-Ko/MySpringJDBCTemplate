@@ -5,10 +5,10 @@ import com.example.mymvc.models.Person;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -60,8 +60,12 @@ public class PeopleController {
     @DeleteMapping("{id}")
     public ResponseEntity<?> delete(@PathVariable("id") int id) {
         personDAO.delete(id);
-      //  return ResponseEntity.ok().body("ччсми");
-        return new ResponseEntity<>(" Успешно  обработан!", HttpStatus.OK);
+
+        List<String> list = new ArrayList<>();
+        list.add(String.format("Человек c номером %d успешно удалён из списка", id));
+
+        return ResponseEntity.ok().body(list);
+
     }
 
 }
