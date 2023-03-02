@@ -1,4 +1,4 @@
-package com.example.mymvc.dao;
+package com.example.mymvc.service;
 
 import com.example.mymvc.models.Person;
 import lombok.Data;

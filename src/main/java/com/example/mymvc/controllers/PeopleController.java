@@ -1,6 +1,6 @@
 package com.example.mymvc.controllers;
 
-import com.example.mymvc.dao.PersonService;
+import com.example.mymvc.service.PersonService;
 import com.example.mymvc.models.Person;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
