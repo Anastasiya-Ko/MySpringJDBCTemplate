@@ -28,14 +28,14 @@ public class BatchController {
 
     @Operation(summary = "Запрос к БД без использования пакетной вставки", description = "Возвращает время, потраченное на добавление 1000 человек")
     @GetMapping("/without")
-    public void withoutBatch() {
-        personService.testMultipleUpdate();
+    public String withoutBatch() {
+        return personService.testMultipleUpdate();
     }
 
     @Operation(summary = "Запрос к БД С использования пакетной вставки", description = "Возвращает время, потраченное на добавление 1000 человек одним пакетом")
     @GetMapping("/with")
-    public void withBatch() {
-        personService.testBatchUpdate();
+    public String withBatch() {
+       return personService.testBatchUpdate();
     }
 
 

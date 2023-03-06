@@ -63,7 +63,7 @@ public class PersonService {
      * Метод для тестирования вставки 1000 записей в БД, без использования пакетной вставки
      * @return Время, затраченное на операцию
      */
-    public void testMultipleUpdate() {
+    public String testMultipleUpdate() {
         List<Person> people = create1000people();
 
         long before = System.currentTimeMillis();
@@ -75,7 +75,7 @@ public class PersonService {
 
         long after = System.currentTimeMillis();
 
-        System.out.println("Time: " + (after - before));
+        return  "Time: " + (after - before);
     }
 
     /**
@@ -83,7 +83,7 @@ public class PersonService {
      * Для этого используется jdbc template и реализуется анонимный класс
      * @return Время, затраченное на операцию
      */
-    public void testBatchUpdate() {
+    public String testBatchUpdate() {
         List<Person> people = create1000people();
 
         long before = System.currentTimeMillis();
@@ -118,7 +118,7 @@ public class PersonService {
 
         long after = System.currentTimeMillis();
 
-        System.out.println("Time: " + (after - before));
+        return "Time: " + (after - before);
     }
 
     /**
