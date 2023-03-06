@@ -1,7 +1,7 @@
-package com.example.mymvc.controllers;
+package com.example.myspringldbctemplate.controllers;
 
-import com.example.mymvc.models.Person;
-import com.example.mymvc.service.PersonService;
+import com.example.myspringldbctemplate.models.Person;
+import com.example.myspringldbctemplate.service.PersonService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

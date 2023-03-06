@@ -1,4 +1,4 @@
-package com.example.mymvc.valid;
+package com.example.myspringldbctemplate.valid;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;

@@ -1,4 +1,4 @@
-package com.example.mymvc.config;
+package com.example.myspringldbctemplate.config;
 
 
 

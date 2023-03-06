@@ -1,10 +1,10 @@
-package com.example.mymvc;
+package com.example.myspringldbctemplate;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MyMvcApplicationTests {
+class MySpringJDBCTemplateApplicationTests {
 
     @Test
     void contextLoads() {

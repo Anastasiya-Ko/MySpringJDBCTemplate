@@ -1,4 +1,4 @@
-package com.example.mymvc.models;
+package com.example.myspringldbctemplate.models;
 
 
 import jakarta.validation.constraints.*;

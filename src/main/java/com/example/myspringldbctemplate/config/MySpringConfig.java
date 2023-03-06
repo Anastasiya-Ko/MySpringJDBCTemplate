@@ -1,4 +1,4 @@
-package com.example.mymvc.config;
+package com.example.myspringldbctemplate.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -14,7 +14,7 @@ import javax.sql.DataSource;
 import java.util.Objects;
 
 @Configuration
-@ComponentScan("com.example.mymvc")
+@ComponentScan("com.example.myspringldbctemplate")
 @EnableWebMvc
 @PropertySource("classpath:application.properties")
 public class MySpringConfig implements WebMvcConfigurer {

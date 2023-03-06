@@ -1,6 +1,6 @@
-package com.example.mymvc.service;
+package com.example.myspringldbctemplate.service;
 
-import com.example.mymvc.models.Person;
+import com.example.myspringldbctemplate.models.Person;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
@@ -43,7 +43,7 @@ public class PersonService {
     }
 
     public void save(Person person) {
-        jdbcTemplate.update("INSERT INTO Person VALUES (1, ?, ?, ?)", person.getName(), person.getAge(), person.getEmail());
+        jdbcTemplate.update("INSERT INTO Person(name, age, email) VALUES (?, ?, ?)", person.getName(), person.getAge(), person.getEmail());
     }
 
     public void delete(int id) {
