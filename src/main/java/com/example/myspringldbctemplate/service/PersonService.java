@@ -30,7 +30,8 @@ public class PersonService {
     }
 
     public Person show(int id) throws RuntimeException {
-        return jdbcTemplate.query("SELECT * FROM Person WHERE id=?", new Object[]{id}, new BeanPropertyRowMapper<>(Person.class))
+        return jdbcTemplate.query("SELECT * FROM Person WHERE id=?",
+                        new Object[]{id}, new BeanPropertyRowMapper<>(Person.class))
                 .stream().findAny().orElse(null);
     }
 
@@ -43,7 +44,8 @@ public class PersonService {
     }
 
     public void save(Person person) {
-        jdbcTemplate.update("INSERT INTO Person(name, age, email) VALUES (?, ?, ?)", person.getName(), person.getAge(), person.getEmail());
+        jdbcTemplate.update("INSERT INTO Person(name, age, email, address) VALUES (?, ?, ?, ?)",
+                person.getName(), person.getAge(), person.getEmail(), person.getAddress());
     }
 
     public void delete(int id) {
@@ -52,7 +54,8 @@ public class PersonService {
     }
 
     public void update(int id, Person updatePerson) {
-        jdbcTemplate.update("UPDATE Person SET name=?, age=?, email=? WHERE id=?", updatePerson.getName(), updatePerson.getAge(), updatePerson.getEmail(), id);
+        jdbcTemplate.update("UPDATE Person SET name=?, age=?, email=?, address=? WHERE id=?",
+                updatePerson.getName(), updatePerson.getAge(), updatePerson.getEmail(), updatePerson.getAddress(), id);
     }
 
     ////////////////////////////////////////////////////////
@@ -69,8 +72,8 @@ public class PersonService {
         long before = System.currentTimeMillis();
 
         for (Person person : people) {
-            jdbcTemplate.update("INSERT INTO Person VALUES (?, ?, ?, ?)",
-                    person.getId(), person.getName(), person.getAge(), person.getEmail());
+            jdbcTemplate.update("INSERT INTO Person VALUES (?, ?, ?, ?, ?)",
+                    person.getId(), person.getName(), person.getAge(), person.getEmail(), person.getAddress());
         }
 
         long after = System.currentTimeMillis();
@@ -88,7 +91,7 @@ public class PersonService {
 
         long before = System.currentTimeMillis();
 
-        jdbcTemplate.batchUpdate("INSERT INTO Person VALUES(?, ?, ?, ?)",
+        jdbcTemplate.batchUpdate("INSERT INTO Person VALUES(?, ?, ?, ?, ?)",
         new BatchPreparedStatementSetter() {
 
             /**
@@ -103,6 +106,7 @@ public class PersonService {
                 ps.setString(2, people.get(i).getName());
                 ps.setInt(3, people.get(i).getAge());
                 ps.setString(4, people.get(i).getEmail());
+                ps.setString(5, people.get(i).getAddress());
             }
 
             /**
@@ -128,7 +132,7 @@ public class PersonService {
     private List<Person> create1000people() {
         List<Person> people = new ArrayList<>();
         for (int i = 0; i < 1000; i++) {
-            people.add(new Person(i, "Name" + i, 30, "test" + i + "@mail.ru"));
+            people.add(new Person(i, "Name" + i, 30, "test" + i + "@mail.ru", "some address" + i));
         }
         return people;
     }

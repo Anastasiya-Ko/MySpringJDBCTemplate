@@ -17,15 +17,40 @@ public class Person {
     @Min(value = 0, message = "Возраст должен быть больше 0")
     private int age;
 
+    /*
+    Имейл должен иметь вид: имяПользователя@домен
+    ^ - начало строки
+    \\w - Буквенный или цифровой символ или знак подчёркивания(буквы ограничены латиницей)
+    + - один или более таких символов
+    \\. - точка
+     */
+
     @NotNull(message = "Поле имейл должно быть заполнено")
-    @Email(message = "Имейл должен иметь вид имяПользователя@доменноеИмяСервера")
+    @Email()
+    @Pattern(regexp = "^\\w+@\\w+\\.\\w+", message = "Имейл должен иметь вид: имяПользователя@домен")
     private String email;
 
-    public Person(int id, String name, int age, String email) {
+
+    /*Страна, Город, Индекс (6 цифр)
+    [A-Z] - одна заглавная буква англ. алфавита
+    \\w - Буквенный или цифровой символ или знак подчёркивания(буквы ограничены латиницей)
+    + - один или более таких символов
+    , - должна быть запятая в адресе
+    " " - должен быть один пробел
+    повтор ещё один раз
+    \\d - одна или более цифр
+    {6} - количество повторений предыдущего символа
+    */
+    @Pattern(regexp = "[A-Z]\\w+, [A-Z]\\w+, \\d{6}",
+            message = "Адресс должен быть в формате - Страна, Город, индекс(6 цифр)")
+    private String address;
+
+    public Person(int id, String name, int age, String email, String address) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.email = email;
+        this.address = address;
     }
 
     public int getId() {
@@ -58,5 +83,13 @@ public class Person {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
