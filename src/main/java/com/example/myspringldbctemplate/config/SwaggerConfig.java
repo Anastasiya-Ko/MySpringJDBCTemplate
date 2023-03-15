@@ -16,7 +16,7 @@ public class SwaggerConfig {
         return new OpenAPI()
                 .info(
                         new Info()
-                                .title("SpringMVCCourse")
+                                .title("SpringCourse")
                                 .version("1.0.0")
                                 .contact(
                                         new Contact()
